@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import { PostCard } from './components/PostCard';
 
 class App extends React.Component {
   state = {
@@ -21,25 +22,24 @@ class App extends React.Component {
       return { ...post, cover: photosJson[index].url }
     })
     this.setState({ posts: postsAndPhotos })
-    console.log(postsAndPhotos);
   }
 
   // function App() {
   render() {
     const { posts } = this.state
-    console.log(posts, 'posts');
     return (
       <section className="container">
         <div className="posts">
           {posts.map(post => (
-            <div className="post">
-              <img src={post.cover} alt={post.title} />
+            <PostCard
+              key={post.id}
+              title={post.title}
+              body={post.body}
+              id={post.id}
+              cover={post.cover}
+            // post={post}
 
-              <div className="post-content" key={post.id}>
-                <h1>{post.title}</h1>
-                <p>{post.body}</p>
-              </div>
-            </div>
+            />
           )
           )
           }
