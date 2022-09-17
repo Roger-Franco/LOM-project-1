@@ -3,7 +3,7 @@ export const PostCard = ({ cover, title, body, id }) => (
     <img src={cover} alt={title} />
 
     <div className="post-content">
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <p>{body}</p>
     </div>
   </div>
