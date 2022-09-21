@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Button } from '.'
@@ -32,5 +33,10 @@ describe('<Button />', () => {
     const button = screen.getByRole('button', { name: /load more/i })
     expect(button).toBeEnabled();
     // expect(button).not.toBeDisabled();
+  })
+
+  it('should match snapshot', () => {
+    const { container } = render(<Button text="Load more posts" disabled={false} />)
+    expect(container.firstChild).toMatchSnapshot()
   })
 })
