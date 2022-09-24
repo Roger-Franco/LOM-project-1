@@ -24,5 +24,6 @@ OBS: pra resolver problema do eslint e jest: (describe, it, expect), adicionar o
   ]
 
 npm i prop-types
+npm install msw --save-dev => Mock
 
 tempo: 15:30 aula 37
