@@ -8,24 +8,24 @@ const handlers = [
   rest.get('*jsonplaceholder.typicode.com*', async (req, res, ctx) => {
     return res(ctx.json([
       {
-        "userId": 1,
-        "id": 1,
-        "title": "title1",
-        "body": "body1",
+        userId: 1,
+        id: 1,
+        title: "title1",
+        body: "body1",
         url: "img1.jpg"
       },
       {
-        "userId": 2,
-        "id": 2,
-        "title": "title2",
-        "body": "body2",
+        userId: 2,
+        id: 2,
+        title: "title2",
+        body: "body2",
         url: "img2.jpg"
       },
       {
-        "userId": 3,
-        "id": 3,
-        "title": "title3",
-        "body": "body3",
+        userId: 3,
+        id: 3,
+        title: "title3",
+        body: "body3",
         url: "img3.jpg"
       },
     ]))
@@ -46,12 +46,19 @@ describe('<Home/>', () => {
   })
 
   it('Should render search, posts and load more', async () => {
-    // const { debug } = render(<Home />)
-    // screen.debug()
-    // debug()
     render(<Home />)
     const noMorePosts = screen.getByText('Não foi encontrado posts na pesquisa')
+
+    expect.assertions(3)
+
     await waitForElementToBeRemoved(noMorePosts)
-    screen.debug()
+    const search = screen.getByPlaceholderText(/type your search/i)
+    expect(search).toBeInTheDocument()
+
+    const images = screen.getAllByRole('img', { name: /title/i })
+    expect(images).toHaveLength(2)
+
+    const button = screen.getByRole('button', { name: /Load more posts/i })
+    expect(button).toBeInTheDocument()
   });
 });
