@@ -90,4 +90,18 @@ describe('<Home/>', () => {
     expect(screen.getByText('Não foi encontrado posts na pesquisa')).toBeInTheDocument()
   });
 
+  it('Should load more posts', async () => {
+    render(<Home />)
+    const noMorePosts = screen.getByText('Não foi encontrado posts na pesquisa')
+
+    // expect.assertions(3)
+
+    await waitForElementToBeRemoved(noMorePosts)
+
+    const button = screen.getByRole('button', { name: /Load more posts/i })
+    userEvent.click(button)
+
+    expect(screen.getByRole('heading', { name: 'title3 3' })).toBeInTheDocument()
+    expect(button).toBeDisabled()
+  });
 });
